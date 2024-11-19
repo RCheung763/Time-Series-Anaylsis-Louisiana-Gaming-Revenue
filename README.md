@@ -8,7 +8,8 @@ Variables: Date, Plug-In Hybrid Electric Vehicle (PHEV) count, Battery Electric 
 
 Here is our plotted data. We can see that it looks non-linear and non stationary. 
 ![Raw Data](Images/plot_raw_data.png)
-
+Time series models such as ARIMA and SARIMA require data to be stationary. We first take the log of the data to stabilize the variance and linearize the exponential growth. Then we take the difference of the data to remove trends and seasonality to try to acheive stationarity.
+![Log-First Difference](Images/first_diff.png)
 
 
 
