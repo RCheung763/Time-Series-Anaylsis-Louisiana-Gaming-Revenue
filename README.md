@@ -6,7 +6,9 @@ The dataset used is provided by the official Washington state open data portal, 
 
 Variables: Date, Plug-In Hybrid Electric Vehicle (PHEV) count, Battery Electric Vehicle (BEV) Count, Electric Vehicle (EV) Total
 
-SARIMA model 
+Here is our plotted data. We can see that it looks non-linear and non stationary. 
+![Raw Data](images/plot_raw_data.png)
+
 
 
 
