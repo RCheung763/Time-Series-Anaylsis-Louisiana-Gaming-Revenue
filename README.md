@@ -22,7 +22,14 @@ Critical Values {'1%': -3.506057133647011, '5%': -2.8946066061911946, '10%': -2.
 H0: The time series is non-stationary
 HA: The times sereis is stationary
 Our test statistic is greater than our critical value at 5% confidence level -2.816 > -2.894, the p-value is slightly creater than 0.05 at 0.056. We fail to reject he null hypothesis, however the time series is very close to stationary. At the 10% level it is considered stationary.
+![ACF and PACF of First Difference](Images/first_diff_acfs.png)
 
-Since taking the log then differencing did not make is stationary, we take a second difference 
+Since taking the log then differencing did not make the data conclusively stationary, we consider taking a second difference.
+![Second Difference](Images/second_diff.png)
+
+We run another augmented Dickey-Fuller test to check for stationarity.
+ADF Statistic -3.686360058186925
+p-value 0.004309154516231539
+Critical Values {'1%': -3.5148692050781247, '5%': -2.8984085156250003, '10%': -2.58643890625}
 
 
