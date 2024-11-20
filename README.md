@@ -50,31 +50,6 @@ Standard Deviation - Second Difference: 0.009559528347039685
 The standard deviation of the 2nd differenced series is slightly larger than the first differenced series. Which also suggests over-differencing. 
 We proceed using the first differenced series. 
 
-                                        SARIMAX Results                                        
-===============================================================================================
-Dep. Variable:                                       y   No. Observations:                   82
-Model:             SARIMAX(1, 0, 1)x(0, 0, [1, 2], 12)   Log Likelihood                 288.592
-Date:                                 Tue, 19 Nov 2024   AIC                           -565.184
-Time:                                         20:15:50   BIC                           -550.744
-Sample:                                     02-28-2017   HQIC                          -559.387
-                                          - 11-30-2023                                         
-Covariance Type:                                   opg                                         
-==============================================================================
-                 coef    std err          z      P>|z|      [0.025      0.975]
-------------------------------------------------------------------------------
-intercept      0.0076      0.003      2.223      0.026       0.001       0.014
-ar.L1          0.6964      0.140      4.991      0.000       0.423       0.970
-ma.L1         -0.3371      0.191     -1.767      0.077      -0.711       0.037
-ma.S.L12       0.3254      0.104      3.129      0.002       0.122       0.529
-ma.S.L24       0.2754      0.170      1.624      0.104      -0.057       0.608
-sigma2      4.954e-05   7.04e-06      7.035      0.000    3.57e-05    6.33e-05
-===================================================================================
-Ljung-Box (L1) (Q):                   0.01   Jarque-Bera (JB):                 1.38
-Prob(Q):                              0.92   Prob(JB):                         0.50
-Heteroskedasticity (H):               0.50   Skew:                            -0.04
-Prob(H) (two-sided):                  0.07   Kurtosis:                         3.63
-===================================================================================
-
 Auto SARIMAX produced a model with a AR(1) term, MA(1) term, a SMA(2) term, and a seasonal periodicity of 12. 
 
 Our Ljung-Box, Q-statistic, assesses whether the residuals are uncorrelated or white noise. Our Null hypothesis is that there is no autocorrelation in the residuals, our alternative is that there is autocorrelation. This model produces a small q-statistic and a p-value >0.05. We fail to reject the null hypothesis which suggests that the residuals show no significant autocorrelation. 
