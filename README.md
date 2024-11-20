@@ -50,6 +50,8 @@ Standard Deviation - Second Difference: 0.009559528347039685
 The standard deviation of the 2nd differenced series is slightly larger than the first differenced series. Which also suggests over-differencing. 
 We proceed using the first differenced series. 
 
+![SARIMAX](Images/SARIMAX_results.png)
+
 Auto SARIMAX produced a model with a AR(1) term, MA(1) term, a SMA(2) term, and a seasonal periodicity of 12. 
 
 Our Ljung-Box, Q-statistic, assesses whether the residuals are uncorrelated or white noise. Our Null hypothesis is that there is no autocorrelation in the residuals, our alternative is that there is autocorrelation. This model produces a small q-statistic and a p-value >0.05. We fail to reject the null hypothesis which suggests that the residuals show no significant autocorrelation. 
