@@ -50,7 +50,7 @@ Standard Deviation - Second Difference: 0.009559528347039685
 The standard deviation of the 2nd differenced series is slightly larger than the first differenced series. Which also suggests over-differencing. 
 We proceed using the first differenced series. 
 
-![SARIMAX](Images/SARIMAX_results.png)
+![SARIMAX](Images/SARIMAX-results.png)
 
 Auto SARIMAX produced a model with a AR(1) term, MA(1) term, a SMA(2) term, and a seasonal periodicity of 12. 
 
