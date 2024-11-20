@@ -51,4 +51,6 @@ Standard Deviation - Second Difference: 0.009559528347039685
 
 The standard deviation of the 2nd differenced series is slightly larger than the first differenced series. Which also suggests over-differencing. 
 We proceed using the first differenced series. 
+We use auto_arima to get a sense of whe 
+
 
