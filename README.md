@@ -31,5 +31,8 @@ ADF Statistic -3.686360058186925
 p-value 0.004309154516231539
 Critical Values {'1%': -3.5148692050781247, '5%': -2.8984085156250003, '10%': -2.58643890625}
 
-After differencing a second time the series is now more conclusively stationary. We want to be careful of over differencing the data, which can lead to loss of meaningful information and increased noise. We compare the ACF and PACF plots.
+After differencing a second time the series is now more conclusively stationary. We want to be careful of over differencing the data, which can lead to loss of meaningful information and increased noise. 
+
+We compare the ACF and PACF plots.
 ![ACF/PACF First Difference](Images/first_diff_acfs.png)
+![ACF/PACF Second Difference](Images/second_diff_acfs.png)
