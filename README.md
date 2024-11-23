@@ -1,4 +1,4 @@
-# Timeseries analysis using ARIMA/ETS/STL model vs LSTM 
+# Timeseries analysis 
 
 Objective: Test various models to achieve the optimal forecast for horizons = 1 month, 6 months, 1 year.
 
