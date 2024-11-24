@@ -43,15 +43,6 @@ We compare the ACF and PACF plots.
 ![ACF/PACF First Difference](Images/first_diff_acfs.png)
 ![ACF/PACF Second Difference](Images/second_diff_acfs.png)
 
-One indication of over-differencing is seen in the ACF of the series with a second difference. There is a significant negative autocorrelation at lag 1. To verify we look at the standard deviation of both series.
-
-Standard Deviation - First Difference: 0.008192783781508098
-
-Standard Deviation - Second Difference: 0.009559528347039685
-
-The standard deviation of the 2nd differenced series is slightly larger than the first differenced series. Which also suggests over-differencing. 
-We proceed using the first differenced series. 
-
 ![SARIMAX](Images/SARIMAX-results.png)
 
 Auto SARIMAX produced a model with a AR(1) term, MA(1) term, a SMA(2) term, and a seasonal periodicity of 12. 
