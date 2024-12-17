@@ -1,8 +1,27 @@
-# Timeseries analysis 
+# Time Series Analysis of Louisiana's Gambling Revenue
 
-Objective: 1-month, 6-month, 1-year forecasts. Using ARIMA model, exponential smoothing, prophet, and neural network. 
+## Table of Contents
+- [Introduction](#introduction)
+- [Data](#data)
+- [Methodology](#methodology)
+- [Exploratory Analysis](#exploratory-analysis)
+- [Modeling](#modeling)
 
-Data: The dataset was created using revenue reports from the Louisiana Gaming control board website. The monthly revenue reports are for a landbased casino, Harrah's New Orleans. The number pulled from these reports are the gross gaming revenue for the month. The dataset has the monthly revenue from January 2007 to September 2024. 
+## Introduction
+<p> The objective of this project is to identify and evaluate forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. In addition to that forecast this project will also utilize the available data to invesitage the potential relationship between the monthly revenue of sports betting and the revenue from fantasy sports. 
+
+## Data 
+<p>The data was acquired the <a href="https://lgcb.dps.louisiana.gov/revenue_reports.htm" target="_blank">Louisiana Gaming Control Board</a></p>
+
+## Methodology
+
+## Exploratory Analysis
+
+## Modeling
+
+
+
+
 
 
 
