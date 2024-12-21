@@ -20,10 +20,12 @@ As a result of the COVID-19 shutdown Harrah's monthly revenue dropped 61% betwee
 ## Exploratory Analysis
 
 Figure 1 is Harrah's month gross gaming revenue. From visual inspection we can see a general downward trend, and we can see the increased period of volatility begining March of 2020 when the COVID-19 pandemic lockdowns went into effect.  
-Figure 1
-![Figure 1](Images/plot_raw.png)
 
-We inspect further for seasonality in figure 2 using a seasonal plot. It shows the gaming revenue across the months by year. It shows us the monthly gaming revenue by year. From visual inspection there is a lot of variability 
+![Figure 1](Images/plot_raw.png)
+Figure 1
+
+We inspect further for seasonality in figure 2 using a seasonal plot. It shows the gaming revenue across the months by year. It shows us the monthly gaming revenue by year. From visual inspection there is a lot of variability each month between the year
+![Figure 2](Images/plot_raw_year.png)
 
 ## Methodology
 
