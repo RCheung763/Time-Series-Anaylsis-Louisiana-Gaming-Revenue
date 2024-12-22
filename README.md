@@ -30,11 +30,14 @@ Figure 1 is Harrah's month gross gaming revenue. From visual inspection we can s
 ![Figure 1](Images/plot_raw.png)
 Figure 1
 
-Seasonality is not obvious in the time plot of our data. We inspect further for seasonality in figure 2 using a seasonal plot. It shows the gaming revenue across the months by year. It shows us the monthly gaming revenue by year. From visual inspection there is a lot of variability each month between the year, with no indication of seasonality. 
-![Figure 2](Images/plot_raw_year.png)
+Seasonality is not obvious in the time plot of our data. I inspected for seasonality in figure 2 using a seasonal plot. It shows the monthly gaming revenue across the months by year. From visual inspection there is a lot of variability each month between the year, with no indication of seasonality. 
+![Figure 3](Images/plot_raw_year.png)
 
-Figure 3 is the data after the largest outliers, revenue from April, May, and June, was replaced using linear interpolation as described in the data section. 
+Figure 3 shows the data after the largest outliers, revenue from April, May, and June of 2020 and September of 2021, was replaced using linear interpolation as described in the data section. 
 ![Figure 3](Images/plot_imputed.png)
+
+Seasonal trend decomposition with Loess, or STL, was then used on the imputed data to look for any underlying patterns. STL was chosen over other methods of decomposition such as X-11 for its flexibility. It is robust with missing values and outliers, and does not follow strict assumptions about periodicity. Figure shows the data decomposed into trend, season, and residuals.
+!
 
 ## Methodology
 
