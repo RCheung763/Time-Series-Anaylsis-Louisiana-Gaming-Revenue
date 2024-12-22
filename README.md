@@ -7,7 +7,7 @@
 - [Modeling](#modeling)
 
 ## Introduction
-The objective of this project is to identify and evaluate forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The models considered were ARMA, GARCH, prophet, and a LSTM Network. 
+The objective of this project is to evaluate and compare forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The techniques considered were ARMA, ETS, combined GARCH models, prophet, and a LSTM Network. 
 
 ## Data  
 The dataset was created from the monthly revenue reports provided by the <a href="https://lgcb.dps.louisiana.gov/revenue_reports.htm" target="_blank">Louisiana Gaming Control Board</a>. The dataset is composed of the reported monthly gross gaming revenue from Harrah's casino spanning from January 2007 to September 2024, totaling 213 data points. 
@@ -41,16 +41,15 @@ Figure 3 shows the data after the largest outliers, revenue from April, May, and
   <img src="Images/plot_imputed.png" alt="Figure 2" width="600"><br>Figure 3
 </p>
 
-Seasonal trend decomposition with Loess, or STL, was then used on the imputed data to look for any underlying patterns. STL was chosen over other methods of decomposition such as X-11 for its flexibility. It is robust with missing values and outliers, and does not follow strict assumptions about periodicity. Figure 4 shows the data decomposed into trend, season, and residuals. From the trend panel we can see more clearly the extent of the decreasing trend. The seasonal panel shows that there is some seasonality to this data but it is not constant over time. In our remainder panel we can still see some of the dips and peaks in the remainder that are in our dataset, which means that some of the structure of the data is not captured by STL decomposition 
+Seasonal trend decomposition with Loess, or STL, was then used on the imputed data to look for any underlying patterns. STL was chosen over other methods of decomposition such as X-11 for its flexibility. It is robust with missing values and outliers, and does not follow strict assumptions about periodicity. From Figure 4 we can evaluate wheter the error, trend, and seasonality components are additive, multiplicative, or if there is no trend or seasonality. From visual inspection it is likely that the error is additive, despite some volatility it is fairly constant over time, it does not increase or decrease with the level. The trend is likely additive but could also be additive and damped. There is a downward slope especially fowllowing a significant dip in revenue, however we  could consider it damped as it does tend to flatten out over time. From visual inspection the seasonality could be additive or multiplicative, it is fairly constant, however there is increased variation as the levels decrease. 
 
 <p align="center">
   <img src="Images/plot_stl.png" alt="Figure 2" width="600"><br>Figure 4
 </p>  
 
 ## Methodology
-In order to use the ARMA model the data needs to be stationary with a constant mean across time and constant variance. The GARCH model also requires that the mean is constant across time.
-A Dickey-Fuller test was conducted on the imputed and logged data to check for stationarity. This is the result of our ADF test. 
-
+ARIMA/GARCH
+In order to use the ARMA model the data needs to be stationary with a constant mean across time and constant variance. The GARCH model also requires that the mean is constant across time. A Dickey-Fuller test was conducted on the imputed and logged data to check for stationarity. The following is the result of our ADF test. 
   
   | Dickey-Fuller | Lag Order | P-Value | 
   |---------------|-----------|---------|
@@ -68,15 +67,17 @@ Our test statistic tells us how far the data is from a unit root, a negative num
 
 These results suggest that while the data is technically stationary there are some persistent or long-memory process where shocks or trends persist for extended periods. The logged data without differencing will be used to model to avoid over differencing and adding structure to the data. 
 
+The ETS, Prophet, and LSTM model do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. 
+
 To cross validate multiple training sets are created. The first training set is composed of 80% of our data or 170 observations to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
 
 <p align="center">
 <img src="Images/cv1-1.png" width="400"><img src="Images/cv4-1.png" width="400"><br>Figure 7
 </p>
 
+## Models
 
-
-## Modeling
+## Forecast Results 
 
 
 
