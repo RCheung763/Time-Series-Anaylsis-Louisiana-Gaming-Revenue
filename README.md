@@ -25,6 +25,7 @@ Rather than completely removing hurricane/covid era data points but in an effort
 ## Exploratory Analysis
 
 Figure 1 is Harrah's month gross gaming revenue. From visual inspection we can see a general downward trend, and we can see the effects of the pandemic lockdowns begining March of 2020 and the gradual return of revenue as the state slowly reopened.  
+
 <p align="center">
 <img src="Images/plot_raw.png" alt="Figure 1" width="600"><br>Figure 1
 </p>
@@ -41,6 +42,7 @@ Figure 3 shows the data after the largest outliers, revenue from April, May, and
 </p>
 
 Seasonal trend decomposition with Loess, or STL, was then used on the imputed data to look for any underlying patterns. STL was chosen over other methods of decomposition such as X-11 for its flexibility. It is robust with missing values and outliers, and does not follow strict assumptions about periodicity. Figure 4 shows the data decomposed into trend, season, and residuals. From the trend panel we can see more clearly the extent of the decreasing trend. The seasonal panel shows that there is some seasonality to this data but it is not constant over time. In our remainder panel we can still see some of the dips and peaks in the remainder that are in our dataset, which means that some of the structure of the data is not captured by STL decomposition 
+
 <p align="center">
   <img src="Images/plot_stl.png" alt="Figure 2" width="600"><br>Figure 4
 </p>  
@@ -55,7 +57,20 @@ A Dickey-Fuller test was conducted on the imputed and logged data to check for s
   | -4.7          | 5         | 0.01    |
   
 Our test statistic tells us how far the data is from a unit root, a negative number points to stationarity. Our alternative hypothesis is stationarity, our p-value is <0.05. We can reject the null-hypothesis. An ACF plot however shows a more gradual decline to zero which suggests non-stationarity. When the data is differenced an ADF test still the ACF no longer suggests non-stationarity, however the PACF still has several significant spikes. 
-<img src=
+
+<p align="center">
+<img src="Images/acf_plot.png" alt="ACF log" width="500"><img src="Images/acf_ld_plot.png" alt="ACF logdiff" width="500"><br>Figure 5
+</p>
+
+<p align="center">
+<img src="Images/pacf_plot.png" alt="PACF log" width="500"><img src="Images/pacf_ld_plot.png" alt="PACF logdiff" width="500"><br>Figure 6
+</p>
+
+These results suggest that while the data is technically stationary there are some persistent or long-memory process where shocks or trends persist for extended periods. The logged data without differencing will be used to model to avoid over differencing and adding structure to the data. 
+
+To cross validate multiple training sets are created. The first training set is composed of 80% of our data or 170 observations to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. 
+
+
 
 ## Modeling
 
