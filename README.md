@@ -7,27 +7,33 @@
 - [Modeling](#modeling)
 
 ## Introduction
-<p> The objective of this project is to identify and evaluate forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The models considered were ARIMA, exponential smoothing model, GARCH, and a LSTM Network. 
+<p> The objective of this project is to identify and evaluate forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The models considered were ARIMA, exponential smoothing model, GARCH, prophet, and a LSTM Network. 
 
 ## Data  
 <p>The dataset was created from the monthly revenue reports provided by the <a href="https://lgcb.dps.louisiana.gov/revenue_reports.htm" target="_blank">Louisiana Gaming Control Board</a>. The dataset is composed of the reported monthly gross gaming revenue from Harrah's casino spanning from January 2007 to September 2024, totaling 213 data points. 
 
 Data Preprocessing
 
-Two steps were taking during data preprocessing. First, imputation was required for observed outliers that resulted from COVID lockdowns in 2020. A stay-at-home order was implemented in March 23, 2020 as a result Harrah's monthly revenue in the March of 2020 was __% less than March of the previous year. Harrah's reported zero revenue for the months of April and May after the lockdowns continued to be in effect. Harrah's reopened when the state transistion to phase 2 of reopening on June 5th, 2020[wikipedia]. In the month of June Harrah's reported a revenue that was 75% less than the same month in the previous year. Completely removing this covid era and imputation of the covid era data was considered, but in an effort to preserve the information provided by this shock, linear extrapolation was utilized to impute fo the months of April, May, and June. The seccond step taken was transforming the data using natural log to stabilize the variance. 
+Two steps were taking during data preprocessing. First, imputation was required for observed outliers that resulted from COVID lockdowns in 2020. A stay-at-home order was implemented in March 23, 2020 as a result Harrah's monthly revenue in the March of 2020 was __% less than March of the previous year. Harrah's reported zero revenue for the months of April and May after the lockdowns continued to be in effect. Harrah's reopened when the state transistion to phase 2 of reopening on June 5th, 2020[wikipedia]. In the month of June Harrah's reported a revenue that was 75% less than the same month in the previous year.
+
+In dealing with COVID era data I considered a few options, the simplest being keeping the COVID era data or completely removing it. I also considered creating a dummy varaible for pre-COVID data and post-COVID data, but the difficulty in that was defining when post-COVID begins. Also, from our data we can see that by the following March 2021, it had returned to pre-lockdown revenues until there was dramatic dip again starting August of 2021. This was likely due to hurricane Ida which caused widespread power outages, wind damage, localized flooding. Many residents decided to evacuate the area before the storm. 
+
+Rather than completely removing hurricane/covid era data points but in an effort to preserve the information provided by these significant events, linear interpolation was utilized to impute for the months of March, April, May, and June. The result was a reduction in the magnitude of these outliers. The other preprocessing step taken was transforming the data using natural log to stabilize the variance. 
 
 </p>
 
 
 ## Exploratory Analysis
 
-Figure 1 is Harrah's month gross gaming revenue. From visual inspection we can see a general downward trend, and we can see the increased period of volatility begining March of 2020 when the COVID-19 pandemic lockdowns went into effect.  
+Figure 1 is Harrah's month gross gaming revenue. From visual inspection we can see a general downward trend, and we can see the effects of the pandemic lockdowns begining March of 2020 and the gradual return of revenue as the state slowly reopened.  
 
 ![Figure 1](Images/plot_raw.png)
 Figure 1
 
-We inspect further for seasonality in figure 2 using a seasonal plot. It shows the gaming revenue across the months by year. It shows us the monthly gaming revenue by year. From visual inspection there is a lot of variability each month between the year
+Seasonality is not obvious in the time plot of our data. We inspect further for seasonality in figure 2 using a seasonal plot. It shows the gaming revenue across the months by year. It shows us the monthly gaming revenue by year. From visual inspection there is a lot of variability each month between the year, with no indication of seasonality. 
 ![Figure 2](Images/plot_raw_year.png)
+
+Figure 3 is the data after the largest outliers, revenue from April, May, and June, was replaced using linear interpolation.
 
 ## Methodology
 
