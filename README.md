@@ -18,8 +18,7 @@ Two steps were taking for data preprocessing. First, imputation was required for
 
 In dealing with COVID era data I considered a few options, the simplest being keeping the COVID era data or completely removing it. I also considered creating a dummy varaible for pre-COVID data and post-COVID data, but the difficulty in that was defining when post-COVID begins. Also, from our data we can see that by the following March 2021, it had returned to pre-lockdown revenues until there was dramatic dip again starting August of 2021. This was likely due to hurricane Ida which caused widespread power outages, wind damage, localized flooding. Many residents decided to evacuate the area before the storm. 
 
-Rather than completely removing hurricane/covid era data points but in an effort to preserve the information provided by these significant events, linear interpolation was utilized to impute for the months of March, April, May, and June of 2020 and September of 2021. The result was a reduction in the magnitude of these outliers. After our exploratory analysis, the imputed data was tranformed using natural log to stabilize the variance prior to training the models. The Dickey-Fuller test done using the imputed and logged data. 
-
+Rather than completely removing hurricane/covid era data points but in an effort to preserve the information provided by these significant events, linear interpolation was utilized to impute for the months of March, April, May, and June of 2020 and September of 2021. The result was a reduction in the magnitude of these outliers. After our exploratory analysis, the imputed data was tranformed using natural log to stabilize the variance prior to training the models. 
 
 
 ## Exploratory Analysis
@@ -41,7 +40,7 @@ Figure 3 shows the data after the largest outliers, revenue from April, May, and
   <img src="Images/plot_imputed.png" alt="Figure 2" width="600"><br>Figure 3
 </p>
 
-Seasonal trend decomposition with Loess, or STL, was then used on the imputed data to look for any underlying patterns. STL was chosen over other methods of decomposition such as X-11 for its flexibility. It is robust with missing values and outliers, and does not follow strict assumptions about periodicity. From Figure 4 we can evaluate wheter the error, trend, and seasonality components are additive, multiplicative, or if there is no trend or seasonality. From visual inspection it is likely that the error is additive, despite some volatility it is fairly constant over time, it does not increase or decrease with the level. The trend is likely additive but could also be additive and damped. There is a downward slope especially fowllowing a significant dip in revenue, however we  could consider it damped as it does tend to flatten out over time. From visual inspection the seasonality could be additive or multiplicative, it is fairly constant, however there is increased variation as the levels decrease. 
+Seasonal trend decomposition with Loess, or STL, was then used on the imputed data to look for any underlying patterns. STL was chosen over other methods of decomposition such as X-11 for its flexibility. It is robust with missing values and outliers, and does not follow strict assumptions about periodicity. From Figure 4 we can evaluate whether the error, trend, and seasonality components are additive, multiplicative, or if no trend or seasonality is present. From visual inspection it is likely that the error is additive, despite some volatility it is fairly constant over time, it does not increase or decrease with the level. The trend is likely additive but could also be additive and damped. There is a downward slope especially fowllowing a significant dip in revenue, however we  could consider it damped as it does tend to flatten out over time. From visual inspection the seasonality could be additive or multiplicative, it is fairly constant, however there is increased variation as the levels decrease. 
 
 <p align="center">
   <img src="Images/plot_stl.png" alt="Figure 2" width="600"><br>Figure 4
@@ -74,6 +73,12 @@ To cross validate multiple training sets are created. The first training set is 
 <p align="center">
 <img src="Images/cv1-1.png" width="400"><img src="Images/cv4-1.png" width="400"><br>Figure 7
 </p>
+
+** Insert cross validation for prophet and LSTM 
+
+The "fable" package was used in r to find the optimal ARIMA and ETS model. A moving average with a window size of six months was used as a benchmark model for comparison. 
+
+*** Insert methodology for prophet and lstm model
 
 ## Models
 
