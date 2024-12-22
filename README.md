@@ -26,29 +26,25 @@ Rather than completely removing hurricane/covid era data points but in an effort
 
 Figure 1 is Harrah's month gross gaming revenue. From visual inspection we can see a general downward trend, and we can see the effects of the pandemic lockdowns begining March of 2020 and the gradual return of revenue as the state slowly reopened.  
 <p align="center">
-<img src="Images/plot_raw.png" alt="Figure 1" width="600">
+<img src="Images/plot_raw.png" alt="Figure 1" width="600"><br>Figure 1
 </p>
-
-Figure 1
 
 Seasonality is not obvious in the time plot of our data. I inspected for seasonality in figure 2 using a seasonal plot. It shows the monthly gaming revenue across the months by year. From visual inspection there is a lot of variability each month between the year, with no indication of seasonality. 
 
 <p align = "center">
-  <img src="Images/plot_raw_year.png" alt="Figure 2" width="600">
+  <img src="Images/plot_raw_year.png" alt="Figure 2" width="600"><br>Figure 2
 </p>
-Figure 2
 Figure 3 shows the data after the largest outliers, revenue from April, May, and June of 2020 and September of 2021, was replaced using linear interpolation as described in the data section. 
 
 <p align = "center">
-  <img src="Images/plot_imputed.png" alt="Figure 2" width="600">
+  <img src="Images/plot_imputed.png" alt="Figure 2" width="600"><br>Figure 3
 </p>
-Figure 3
+
 Seasonal trend decomposition with Loess, or STL, was then used on the imputed data to look for any underlying patterns. STL was chosen over other methods of decomposition such as X-11 for its flexibility. It is robust with missing values and outliers, and does not follow strict assumptions about periodicity. Figure 4 shows the data decomposed into trend, season, and residuals. From the trend panel we can see more clearly the extent of the decreasing trend. The seasonal panel shows that there is some seasonality to this data but it is not constant over time. In our remainder panel we can still see some of the dips and peaks in the remainder that are in our dataset, which means that some of the structure of the data is not captured by STL decomposition 
 <p align="center">
-  <img src="Images/plot_stl.png" alt="Figure 2" width="600">
+  <img src="Images/plot_stl.png" alt="Figure 2" width="600"><br>Figure 4
 </p>  
 
- Figure 4
 ## Methodology
 In order to use the ARMA model the data needs to be stationary with a constant mean across time and constant variance. The GARCH model also requires that the mean is constant across time.
 A Dickey-Fuller test was conducted on the imputed and logged data to check for stationarity. This is the result of our ADF test. 
@@ -58,7 +54,8 @@ A Dickey-Fuller test was conducted on the imputed and logged data to check for s
   |---------------|-----------|---------|
   | -4.7          | 5         | 0.01    |
   
-Our test statistic tells us how far the data is from a unit root, a negative number points to stationarity. Our alternative hypothesis is stationarity, our p-value is <0.05. We can reject the null-hypothesis. An ACF plot however shows a more gradual decline to zero which suggests non-stationarity. When the data is differenced an ADF test still the ACF no longer suggests non-stationarity, however the PACF has several significant spikes as a result of the differencing 
+Our test statistic tells us how far the data is from a unit root, a negative number points to stationarity. Our alternative hypothesis is stationarity, our p-value is <0.05. We can reject the null-hypothesis. An ACF plot however shows a more gradual decline to zero which suggests non-stationarity. When the data is differenced an ADF test still the ACF no longer suggests non-stationarity, however the PACF still has several significant spikes. 
+<img src=
 
 ## Modeling
 
