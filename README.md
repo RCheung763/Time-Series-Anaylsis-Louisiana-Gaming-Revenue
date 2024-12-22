@@ -14,11 +14,11 @@
 
 Data Preprocessing
 
-Two steps were taking during data preprocessing. First, imputation was required for observed outliers that resulted from COVID lockdowns in 2020. A stay-at-home order was implemented in March 23, 2020 as a result Harrah's monthly revenue in the March of 2020 was __% less than March of the previous year. Harrah's reported zero revenue for the months of April and May after the lockdowns continued to be in effect. Harrah's reopened when the state transistion to phase 2 of reopening on June 5th, 2020[wikipedia]. In the month of June Harrah's reported a revenue that was 75% less than the same month in the previous year.
+Two steps were taking for data preprocessing. First, imputation was required for observed outliers that resulted from two significant drops in revenue. First was the result of COVID lockdowns in 2020. A stay-at-home order was implemented in March 23, 2020 as a result Harrah's monthly revenue in the March of 2020 was __% less than March of the previous year. Harrah's reported zero revenue for the months of April and May after the lockdowns continued to be in effect. Harrah's reopened when the state transistion to phase 2 of reopening on June 5th, 2020[wikipedia]. In the month of June Harrah's reported a revenue that was 75% less than the same month in the previous year.
 
 In dealing with COVID era data I considered a few options, the simplest being keeping the COVID era data or completely removing it. I also considered creating a dummy varaible for pre-COVID data and post-COVID data, but the difficulty in that was defining when post-COVID begins. Also, from our data we can see that by the following March 2021, it had returned to pre-lockdown revenues until there was dramatic dip again starting August of 2021. This was likely due to hurricane Ida which caused widespread power outages, wind damage, localized flooding. Many residents decided to evacuate the area before the storm. 
 
-Rather than completely removing hurricane/covid era data points but in an effort to preserve the information provided by these significant events, linear interpolation was utilized to impute for the months of March, April, May, and June. The result was a reduction in the magnitude of these outliers. The other preprocessing step taken was transforming the data using natural log to stabilize the variance. 
+Rather than completely removing hurricane/covid era data points but in an effort to preserve the information provided by these significant events, linear interpolation was utilized to impute for the months of March, April, May, and June of 2020 and September of 2021. The result was a reduction in the magnitude of these outliers. The other preprocessing step taken was transforming the data using natural log to stabilize the variance. 
 
 </p>
 
@@ -33,7 +33,8 @@ Figure 1
 Seasonality is not obvious in the time plot of our data. We inspect further for seasonality in figure 2 using a seasonal plot. It shows the gaming revenue across the months by year. It shows us the monthly gaming revenue by year. From visual inspection there is a lot of variability each month between the year, with no indication of seasonality. 
 ![Figure 2](Images/plot_raw_year.png)
 
-Figure 3 is the data after the largest outliers, revenue from April, May, and June, was replaced using linear interpolation.
+Figure 3 is the data after the largest outliers, revenue from April, May, and June, was replaced using linear interpolation as described in the data section. 
+![Figure 3](Images/plot_imputed.png)
 
 ## Methodology
 
