@@ -7,7 +7,8 @@
 - [Modeling](#modeling)
 
 ## Introduction
-The objective of this project is to evaluate and compare forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The techniques considered were ARMA, ETS, combined GARCH models, prophet, and a LSTM Network. 
+The objective of this project is to evaluate and compare forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The techniques considered were ARMA, ETS, combined GARCH models, and prophet. 
+
 
 ## Data  
 The dataset was created from the monthly revenue reports provided by the <a href="https://lgcb.dps.louisiana.gov/revenue_reports.htm" target="_blank">Louisiana Gaming Control Board</a>. The dataset is composed of the reported monthly gross gaming revenue from Harrah's casino spanning from January 2007 to September 2024, totaling 213 data points. 
@@ -67,7 +68,7 @@ Our test statistic tells us how far the data is from a unit root, a negative num
 
 These results suggest that while the data is technically stationary there are some persistent or long-memory process where shocks or trends persist for extended periods. The logged data without differencing will be used to model to avoid over differencing and adding structure to the data. 
 
-The ETS, Prophet, and LSTM model do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. 
+The ETS, Prophet, and deep learning models do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. 
 
 To cross validate multiple training sets are created. The first training set is composed of 80% of our data or 170 observations to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
 
@@ -75,13 +76,11 @@ To cross validate multiple training sets are created. The first training set is 
 <img src="Images/cv1-1.png" width="400"><img src="Images/cv4-1.png" width="400"><br>Figure 7
 </p>
 
-** Insert cross validation for prophet and LSTM 
+A similar cross validation technique is used for both the ARIMA, ETS, and prophet model.
 
-The "fable" package was used in r to find the optimal ARIMA and ETS model. A moving average with a window size of six months was used as a benchmark model for comparison. 
+## Models Evaluation
 
-*** Insert methodology for prophet and lstm model
-
-## Models
+ARIMA 
 
 ## Forecast Results 
 
