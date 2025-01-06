@@ -4,10 +4,10 @@
 - [Data](#data)
 - [Methodology](#methodology)
 - [Exploratory Analysis](#exploratory-analysis)
-- [Modeling](#modeling)
+- [Model Evaluation](#model-evaluation)
 
 ## Introduction
-The objective of this project is to evaluate and compare forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The techniques considered were ARMA, ETS, combined GARCH models, and prophet. 
+The objective of this project is to evaluate and compare forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The techniques considered were ARMA, ETS, and prophet. 
 
 
 ## Data  
@@ -25,13 +25,13 @@ Models were run with using the imputed and log transformed data and the non-impu
 
 ## Exploratory Analysis
 
-Figure 1 is Harrah's month gross gaming revenue. From visual inspection we can see a general downward trend, and we can see the effects of the pandemic lockdowns begining March of 2020 and the gradual return of revenue as the state slowly reopened.  
+Figure 1 is Harrah's month gross gaming revenue. From visual inspection we can see a general downward trend, and we can see the effects of the pandemic lockdowns begining March of 2020 and the gradual return of revenue as the state slowly reopened. We can also see the dip in revenues as a result of hurricane Ida in August the following year. 
 
 <p align="center">
 <img src="Images/plot_raw.png" alt="Figure 1" width="600"><br>Figure 1
 </p>
 
-Seasonality is not obvious in the time plot of our data. I inspected for seasonality in figure 2 using a seasonal plot. It shows the monthly gaming revenue across the months by year. From visual inspection there is a lot of variability each month between the year, with no indication of seasonality. 
+Seasonality is not obvious from visual inspection. I inspected for seasonality in figure 2 using a seasonal plot. It shows the monthly gaming revenue across the months by year. From visual inspection there is a lot of variability each month between the year, with no indication of seasonality. 
 
 <p align = "center">
   <img src="Images/plot_raw_year.png" alt="Figure 2" width="600"><br>Figure 2
@@ -49,14 +49,16 @@ Seasonal trend decomposition with Loess, or STL, was then used on the imputed da
 </p>  
 
 ## Methodology
-ARIMA/GARCH
-In order to use the ARMA model the data needs to be stationary with a constant mean across time and constant variance. The GARCH model also requires that the mean is constant across time. A Dickey-Fuller test was conducted on the imputed and logged data to check for stationarity. The following is the result of our ADF test. 
+ARIMA
+In order to use the ARMA model the data needs to be stationary with a constant mean across time and constant variance. A Dickey-Fuller test was conducted on the imputed and logged data to check for stationarity. The following is the result of our ADF test. 
   
   | Dickey-Fuller | Lag Order | P-Value | 
   |---------------|-----------|---------|
   | -4.7          | 5         | 0.01    |
   
-Our test statistic tells us how far the data is from a unit root, a negative number points to stationarity. Our alternative hypothesis is stationarity, our p-value is <0.05. We can reject the null-hypothesis. An ACF plot however shows a more gradual decline to zero which suggests non-stationarity. When the data is differenced an ADF test still the ACF no longer suggests non-stationarity, however the PACF still has several significant spikes. 
+Our test statistic tells us how far the data is from a unit root. A unit root is a stochastic trend in a time series that indicate that a value will be highly dependent on its past values, the presence of a unit root indicates that it is non-stationary. The negative number suggests that it further from a unit root and that our series is stationary.  Our alternative hypothesis is stationarity, our p-value is <0.05 so we can reject the null-hypothesis. 
+
+An ACF plot however shows a more gradual decline to zero which suggests non-stationarity. When the data is differenced an ADF test still the ACF no longer suggests non-stationarity, however the PACF still has several significant spikes. 
 
 <p align="center">
 <img src="Images/acf_plot.png" alt="ACF log" width="500"><img src="Images/acf_ld_plot.png" alt="ACF logdiff" width="500"><br>Figure 5
@@ -66,9 +68,9 @@ Our test statistic tells us how far the data is from a unit root, a negative num
 <img src="Images/pacf_plot.png" alt="PACF log" width="500"><img src="Images/pacf_ld_plot.png" alt="PACF logdiff" width="500"><br>Figure 6
 </p>
 
-These results suggest that while the data is technically stationary there are some persistent or long-memory process where shocks or trends persist for extended periods. The logged data without differencing will be used to model to avoid over differencing and adding structure to the data. 
+These results suggest that while the data is technically stationary there are some persistent or long-memory process where shocks or trends persist for extended periods.
 
-The ETS, Prophet, and deep learning models do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. 
+The ETS and Prophet models do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. 
 
 To cross validate multiple training sets are created. The first training set is composed of 80% of our data or 170 observations to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
 
@@ -76,11 +78,23 @@ To cross validate multiple training sets are created. The first training set is 
 <img src="Images/cv1-1.png" width="400"><img src="Images/cv4-1.png" width="400"><br>Figure 7
 </p>
 
-A similar cross validation technique is used for both the ARIMA, ETS, and prophet model.
+A similar cross validation technique is used for the ARIMA, ETS, and prophet model.
 
-## Models Evaluation
+## Model Evaluation
 
 ARIMA 
+Using the fable package in R, the optimal ARIMA model was identified as ARIMA(0,1,1)(0,0,1)[12], indicating that the data required first differencing to achieve stationarity, included a non-seasonal moving average term (MA1), a seasonal moving average term (SMA1), and exhibited a 12-month seasonal period.
+
+
+|      |   MA1   |   SMA1 |
+|------|---------|--------|
+| Coefficients | -0.4919 | 0.1081 |
+| S.E. | 0.0729  | 0.0748 |
+
+| $\sigma^2$ | log-likelihood |  AIC  |  BIC  |
+|------------|----------------|-------|-------|
+| 0.0234 | 87.91 | 169.82 | 160.08 |
+
 
 ## Forecast Results 
 
