@@ -7,11 +7,15 @@
 - [Model Evaluation](#model-evaluation)
 
 ## Introduction
-The objective of this project is to evaluate and compare forecasting methods to achieve the highest accuracy in forecasting the monthly revenue of Harrah's casino located in New Orleans, Louisiana. The techniques considered were ARMA, ETS, and prophet. 
+The objective of this project is to evaluate and compare forecasting methods to achieve the highest accuracy forecast of the monthly revenue of Harrah’s casino located in New Orleans, Louisiana. The models considered are ARIMA, ETS, and Meta’s Prophet. We will evaluate the model performance in forecasting revenue one month, 6 months, and 1 year out. 
 
+This dataset posed an interesting problem as it contains two back-to-back outliers. One was a result of COVID lockdown in the spring of 2020 and the second was a result of Hurricane Ida the following year. 
+
+****Insert summary of results
 
 ## Data  
 The dataset was created from the monthly revenue reports provided by the <a href="https://lgcb.dps.louisiana.gov/revenue_reports.htm" target="_blank">Louisiana Gaming Control Board</a>. The dataset is composed of the reported monthly gross gaming revenue from Harrah's casino spanning from January 2007 to September 2024, totaling 213 data points. 
+
 
 Data Preprocessing
 
