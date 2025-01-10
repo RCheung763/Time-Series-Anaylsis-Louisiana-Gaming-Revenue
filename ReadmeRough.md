@@ -38,4 +38,5 @@ Seasonal trend decomposition with Loess, or STL, was then used on the imputed da
 The dataset was created from the monthly revenue reports provided by the <a href="https://lgcb.dps.louisiana.gov/revenue_reports.htm" target="_blank">Louisiana Gaming Control Board</a>. The dataset is composed of the reported monthly gross gaming revenue from Harrah's casino spanning from January 2007 to September 2024, totaling 213 data points. 
 
 Data Preprocessing
-In dealing with the outliers data I considered a few options, the simplest being keeping the data points as is or imputation. The tsclean function from the forecast package in R was used to detect outliers. The tsclean function applies Loess smoothing method creating a smoothed version of the timeseries and flags observations as outliers based on the reisduals. After detection it then conducts ex
+In dealing with the outliers data I considered a few options, the simplest being keeping the data points as is or imputation. The tsclean function from the forecast package in R was used to detect outliers. The tsclean function applies Loess smoothing method creating a smoothed version of the timeseries and flags observations as outliers based on the reisduals. After detection it then performs imputation using linear interpolation. 
+
