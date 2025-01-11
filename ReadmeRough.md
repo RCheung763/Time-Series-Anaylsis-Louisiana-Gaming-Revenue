@@ -48,7 +48,7 @@ The tsclean function flagged and imputated the two observations where zero reven
   <img src="Images/plot_imputed.png" alt="Figure 2" width="600"><br>Figure 4
 </p>
 
-Following imputation a log transformation was performed to stablize the variance. An exogenous dummy variable was created for the ARIMAX model to account for COVID-19 lockdowns and Hurricane Ida. The dummy variable indicated April and May as Covid lockdown dates, and March of 2021 for Hurrican IDA. Prophet has a feature that can treat shocks from events such as COVID-19 and Hurrican Ida as one off Holidays without the creation of an exogenous variable. 
+An exogenous dummy variable was created for the ARIMAX model to account for COVID-19 lockdowns and Hurricane Ida. The dummy variable indicated April and May as Covid lockdown dates, and March of 2021 for Hurrican IDA. Prophet has a feature that can treat shocks from events such as COVID-19 and Hurrican Ida as one off Holidays without the creation of an exogenous variable. 
 
 ## Methodology
 
@@ -58,6 +58,6 @@ In order to use the ARMA model the data needs to be stationary with a constant m
   
   | Dickey-Fuller | Lag Order | P-Value | 
   |---------------|-----------|---------|
-  | -4.6          | 5         | 0.01    |
+  | -5.0204       | 5         | 0.01    |
   
 Our test statistic tells us how far the data is from a unit root. A unit root is a stochastic trend in a time series that indicate that a value will be highly dependent on its past values, the presence of a unit root indicates that it is non-stationary. The negative number suggests that it further from a unit root and that our series is stationary.  Our alternative hypothesis is stationarity, our p-value is <0.05 so we can reject the null-hypothesis. 
