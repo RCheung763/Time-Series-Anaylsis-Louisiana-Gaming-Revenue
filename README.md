@@ -68,41 +68,31 @@ Our test statistic tells us how far the data is from a unit root. A unit root is
 An ACF plot however shows a more gradual decline to zero which suggests non-stationarity. When the data is differenced an ADF test still the ACF no longer suggests non-stationarity, however the PACF still has several significant spikes. 
 
 <p align="center">
-<img src="Images/acf_plot.png" alt="ACF log" width="500"><img src="Images/acf_ld_plot.png" alt="ACF logdiff" width="500"><br>Figure 5
+<img src="Images/acf_plot.png" alt="ACF log" width="500"><br>Figure 5
 </p>
 
 <p align="center">
-<img src="Images/pacf_plot.png" alt="PACF log" width="500"><img src="Images/pacf_ld_plot.png" alt="PACF logdiff" width="500"><br>Figure 6
+<img src="Images/pacf_plot.png" alt="PACF log" width="500"><br>Figure 6
 </p>
 
 The autocorrelation function, acf, plot shows suggest that an autoregressive, AR, model may be appropriate. The partial autocorrelation function, PACF, plot suggests that it may be of order 1 or higher.
 
 The ETS and Prophet models do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. So an ADF test is no necessary.
 
-To cross validate multiple training sets are created. The first training set is composed of 80% of our data or 170 observations to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
+The dataset was split, 90% training set and remaining for a test set. Cross validation is used to create multiple subsets from the training sets. The first training set is composed of 80% of our data or 170 observations to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
 
 <p align="center">
 <img src="Images/cv1-1.png" width="400"><img src="Images/cv4-1.png" width="400"><br>Figure 7
 </p>
 
-A similar cross validation technique is used for the ARIMA, ETS, and the prophet model.
+This cross validation technique is used for the ARIMA, ETS, and the prophet model.
 
-While ETS does not support exogenous variables one was considered for the ARIMA. The exogenous variable would be 
+While ETS does not support exogenous variables ARIMA does and was considered for the ARIMA. The exogenous variable would be a dummy indicating whether the observation was during COVID lockdown period or evacuation period due to Hurricane Ida. The resulting models exhibiting unit roots and became problematic with the smaller datasets in our cross validation where the exogenous variable was all zeros because neither COVID or hurricane evacuations occured. The prophet model allows for inclusion of holdidays, special events, and shocks much more smoothly. Shocks were included in the prophet model for the lockdown period from March 2020 to June 2020, and the Hurricane Ida period which effected revenue from August of 2021 to November of 2021. The performance of the prophet model with the shocks improved on all metrics in comparison to the prophet model without.
+
+For the prophet model two parameters were tuned. The first was changepoint_prior_scale which determines the flexibility of the trend
 
 ## Model Evaluation
 
-ARIMA 
-Using the fable package in R, the optimal ARIMA model was identified as ARIMA(0,1,1)(0,0,1)[12], indicating that the data required first differencing to achieve stationarity, included a non-seasonal moving average term (MA1), a seasonal moving average term (SMA1), and exhibited a 12-month seasonal period.
-
-
-|      |   MA1   |   SMA1 |
-|------|---------|--------|
-| Coefficients | -0.4919 | 0.1081 |
-| S.E. | 0.0729  | 0.0748 |
-
-| $\sigma^2$ | log-likelihood |  AIC  |  BIC  |
-|------------|----------------|-------|-------|
-| 0.0234 | 87.91 | 169.82 | 160.08 |
 
 
 ## Forecast Results 
