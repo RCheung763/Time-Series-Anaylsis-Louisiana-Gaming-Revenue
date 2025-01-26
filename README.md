@@ -79,7 +79,7 @@ The autocorrelation function, acf, plot shows suggest that an autoregressive, AR
 
 The ETS and Prophet models do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. So an ADF test is no necessary.
 
-The dataset was split, 90% training set and remaining for a test set. Cross validation is used to create multiple subsets from the training sets. The first training set is composed of 80% of our data or 170 observations to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
+The first training set is composed of 90% of our data and the test set is the remaining 10%.  Cross validation was done by creating multiple training sets from the training set. The first training set will to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
 
 <p align="center">
 <img src="Images/cv1-1.png" width="400"><img src="Images/cv4-1.png" width="400"><br>Figure 7
@@ -89,10 +89,38 @@ This cross validation technique is used for the ARIMA, ETS, and the prophet mode
 
 While ETS does not support exogenous variables ARIMA does and was considered for the ARIMA. The exogenous variable would be a dummy indicating whether the observation was during COVID lockdown period or evacuation period due to Hurricane Ida. The resulting models exhibiting unit roots and became problematic with the smaller datasets in our cross validation where the exogenous variable was all zeros because neither COVID or hurricane evacuations occured. The prophet model allows for inclusion of holdidays, special events, and shocks much more smoothly. Shocks were included in the prophet model for the lockdown period from March 2020 to June 2020, and the Hurricane Ida period which effected revenue from August of 2021 to November of 2021. The performance of the prophet model with the shocks improved on all metrics in comparison to the prophet model without.
 
-For the prophet model two parameters were tuned. The first was changepoint_prior_scale which determines the flexibility of the trend
+For the prophet model two parameters were tuned. The first was changepoint_prior_scale which determines how much the trend changes at the trend changepoints, where too small of a value can be an underfit handling extreme changes in the trend and too large of a value will cause overfitting. The second was seasonality_prior_scale, this controls the flexibility of the seasonality, where larger alues allow the seasonality to include large fluctuations and smaller value shrinks that magnitude. Four values for each parameter was tested using RMSE as the metric for evaluation. Both parameters work like regularization techniques. The best value for changepoint_prior_scale is 0.001 and the seasonlity_prior_scale was 0.01.
 
 ## Model Evaluation
 
+The following are the resulting performance metrics from the cross-validation training at different horizons, a mean model with a 6-month rolling window average was used as a benchmark model. 
+
+Horizon: 1-month 
+
+| Model   | RMSE      | MAE       | MAPE   |
+|---------|-----------|-----------|--------|
+| Mean    | 5,301,099 | 3,701,840 | 26.87% |
+| ARIMA   | 5,071,280 | 3,344,302 | 23.78% |
+| ETS     | 4,588,385 | 2,996,947 | 21.64% |
+| Prophet | 4,714,701 | 3,557,216 | 21.80% |
+
+Horizon: 6-month
+
+| Model   | RMSE      | MAE       | MAPE   |
+|---------|-----------|-----------|--------|
+| Mean    | 6,215,005 | 4,336,561 | 31.67% |
+| ARIMA   | 6,677,959 | 4,455,446 | 31.75% |
+| ETS     | 6,037,209 | 4,060,273 | 30.24% |
+| Prophet | 6,018,903 | 5,282,748 | 32.90% |
+
+Horizon: 12-month
+
+| Model   | RMSE      | MAE       | MAPE   |
+|---------|-----------|-----------|--------|
+| Mean    | 6,577,880 | 4,609,366 | 33.14% |
+| ARIMA   | 7,182,500 | 4,845,162 | 33.89% |
+| ETS     | 6,522,722 | 4,536,396 | 32.82% |
+| Prophet | 6,018,903 | 5,282,748 | 32.90% |
 
 
 ## Forecast Results 
