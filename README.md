@@ -93,7 +93,7 @@ For the prophet model two parameters were tuned. The first was changepoint_prior
 
 ## Model Evaluation
 
-The following are the resulting performance metrics from the cross-validation training at different horizons, a mean model with a 6-month rolling window average was used as a benchmark model. 
+The following are the resulting performance metrics from the cross-validation training at different horizons, a mean model with a 6-month rolling window average was used as a benchmark model. Results are fairly similar across models. Using RMSE to evaluate our models we can see that for short term forecasts the ETS model performs the best. The Prophet model performs better for longer horizon.  
 
 Horizon: 1-month 
 
@@ -122,15 +122,18 @@ Horizon: 12-month
 | ETS     | 6,522,722 | 4,536,396 | 32.82% |
 | Prophet | 6,018,903 | 5,282,748 | 32.90% |
 
-Results are fairly similar across models. Using RMSE to evaluate our models we can see that for short term forecasts the ETS model performs the best. The Prophet model performs better for longer horizon. I then use the entire training set to train the models and tested using the remaining 10% of the dataset. The test set has 22 observations from December 2022 to September 2024.
+# Residual Analysis
 
-| Model   | RMSE      | MAE       | MAPE   |
-|---------|-----------|-----------|--------|
-| Mean    | 2,947,411 | 2,349,928 | 12.78% |
-| ARIMA   | 2,816,615 | 2,274,886 | 12.30  |
-| ETS     | 3,992,650 | 3,609,188 | 18.91% |
-| Prophet | 2,119,691 | 1,723,205 | 5.52%  |
+In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. 
 
+The following are the results from the model trained using 90% of the dataset and tested using the remaining 10% of the dataset. The test set has 22 observations from December 2022 to September 2024. Across all metrics the prophet model performes the best. 
+
+| Model    | RMSE      | MAE       | MAPE   |
+|----------|-----------|-----------|--------|
+| Mean     | 2,947,411 | 2,349,928 | 12.78% |
+| ARIMA    | 2,816,615 | 2,274,886 | 12.30  |
+| ETS      | 3,992,650 | 3,609,188 | 18.91% |
+| Prophet* | 2,119,691 | 1,723,205 | 5.52%  |
 
 ## Forecast Results 
 
