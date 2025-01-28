@@ -132,7 +132,6 @@ Results are fairly similar across models. Using RMSE to evaluate our models we c
 | Prophet | 2,119,691 | 1,723,205 | 5.52%  |
 
 
-
 ## Forecast Results 
 
 
