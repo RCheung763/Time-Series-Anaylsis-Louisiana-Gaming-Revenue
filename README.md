@@ -122,7 +122,16 @@ Horizon: 12-month
 | ETS     | 6,522,722 | 4,536,396 | 32.82% |
 | Prophet | 6,018,903 | 5,282,748 | 32.90% |
 
-From these results using RMSE to evaluate our models we can see that for short term forecasts the ETS model performs the best. The Prophet model performs better for longer horizon.
+Results are fairly similar across models. Using RMSE to evaluate our models we can see that for short term forecasts the ETS model performs the best. The Prophet model performs better for longer horizon. I then use the entire training set to train the models and tested using the remaining 10% of the dataset. The test set has 22 observations from December 2022 to September 2024.
+
+| Model   | RMSE | MAE | MAPE |
+|-------|------|-----|------|
+| Mean  |
+| ARIMA |
+| ETS   |
+| Prophet |
+
+
 
 ## Forecast Results 
 
