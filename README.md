@@ -122,9 +122,9 @@ Horizon: 12-month
 | ETS     | 6,522,722 | 4,536,396 | 32.82% |
 | Prophet | 6,018,903 | 5,282,748 | 32.90% |
 
-# Residual Analysis
+### Residual Analysis
 
-In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. 
+In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. The other important properties is to see if residuals center around zero
 
 The following are the results from the model trained using 90% of the dataset and tested using the remaining 10% of the dataset. The test set has 22 observations from December 2022 to September 2024. Across all metrics the prophet model performes the best. 
 
