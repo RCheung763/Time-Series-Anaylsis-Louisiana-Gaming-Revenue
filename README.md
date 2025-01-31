@@ -146,9 +146,9 @@ To check for autocorrelation in the residuals we use the Ljung-Box test. The nul
 | Model    | Ljung-Box Statistic    | P-Value |
 |----------|------------------------|---------|
 | Mean     | 18.91 | 0.0001|
-| ARIMA    | 0.07 | 0.78 |
-| ETS      | 0.19 | 0.66 | 
-| Prophet* | | | 
+| ARIMA*   | 0.07  | 0.78  |
+| ETS      | 0.19  | 0.66  | 
+| Prophet  | 19.80 | 0.031 | 
 
 The following are the results from the model trained using 90% of the dataset and tested using the remaining 10% of the dataset. The test set has 22 observations from December 2022 to September 2024. Across all metrics the prophet model performes the best. 
 
@@ -160,7 +160,7 @@ The following are the results from the model trained using 90% of the dataset an
 | Prophet* | 2,119,691 | 1,723,205 | 5.52%  |
 
 ## Forecast Results 
-
+19.79942   0.031208
 
 
 
