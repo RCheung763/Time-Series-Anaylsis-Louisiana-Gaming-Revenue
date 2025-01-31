@@ -124,7 +124,9 @@ Horizon: 12-month
 
 ### Residual Analysis
 
-In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. The other important properties is to see if residuals center around zero
+In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. The other important properties is to see if residuals center around zero which tells us whether the forecast is biased or not. Additionally, but not necessary, we can check to see if  
+
+The fable package in R allows for easy plotting of our residuals, Figure 8 is the residual plot of our ETS model.
 
 The following are the results from the model trained using 90% of the dataset and tested using the remaining 10% of the dataset. The test set has 22 observations from December 2022 to September 2024. Across all metrics the prophet model performes the best. 
 
