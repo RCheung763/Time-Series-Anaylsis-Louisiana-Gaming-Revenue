@@ -126,7 +126,29 @@ Horizon: 12-month
 
 In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. The other important properties is to see if residuals center around zero which tells us whether the forecast is biased or not. Additionally, but not necessary, we can check to see if  
 
-The fable package in R allows for easy plotting of our residuals, Figure 8 is the residual plot of our ETS model.
+The fable package in R allows for easy plotting of our residuals, Figure 8 and 9 are the residual plot of our ETS and ARIMA model. These plots make it easy to visually inspect for a mean that centers around zero. 
+
+<p align="center">
+<img src="Images/ets_resid_plot.png" alt="ETS Residuals" width="500"><br>Figure 8 ETS Residual Diagnosis
+</p>
+<br>
+<p align="center">
+<img src="Images/arima_resid_plot.png" alt="ETS Residuals" width="500"><br>Figure 9 ARIMA Residual Diagnosis
+</p>
+
+For the prophet model, I manually plotted the residuals to inspect for a mean around zero. Figure 10 is the residual plot from the Prophet Model. Apart from the outliers as a result of shocks from COVID and Hurricane IDA it does stay fairly centered around zero for all models. 
+<p align="center">
+<img src="Images/prophet_resid_plot.png" alt="ETS Residuals" width="500"><br>Figure 10 Prophet Residual Diagnosis
+</p>
+
+To check for autocorrelation in the residuals we use the Ljung-Box test. The null hypothesis is that there is no autocorrelation and the residuals are independently distributed. The alternative hypothesis is that at least one autocorrelation is statistically significant different from zero. 
+
+| Model    | Ljung-Box Statistic    | P-Value |
+|----------|------------------------|---------|
+| Mean     | 18.91 | 0.0001|
+| ARIMA    | 0.07 | 0.78 |
+| ETS      | 0.19 | 0.66 | 
+| Prophet* | | | 
 
 The following are the results from the model trained using 90% of the dataset and tested using the remaining 10% of the dataset. The test set has 22 observations from December 2022 to September 2024. Across all metrics the prophet model performes the best. 
 
