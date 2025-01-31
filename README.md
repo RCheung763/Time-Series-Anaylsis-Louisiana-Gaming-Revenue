@@ -163,7 +163,7 @@ The following are the results from the model trained using 90% of the dataset an
 
 Moving forward using the ARIMA model for a six-month forecast. Figure 11 is a plot of the 6-month forecast for Harrah's.
 <p align="center">
-<img src="Images/six_month_fcast.png" alt="Six Month Forecast" width="500"><br>Figure 9 6-Month Forecast
+<img src="Images/six_month_fcast.png" alt="Six Month Forecast" width="500"><br>Figure 11 6-Month Forecast
 </p>
 
 | Date | Revenue |
