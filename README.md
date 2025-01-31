@@ -155,13 +155,25 @@ The following are the results from the model trained using 90% of the dataset an
 | Model    | RMSE      | MAE       | MAPE   |
 |----------|-----------|-----------|--------|
 | Mean     | 2,947,411 | 2,349,928 | 12.78% |
-| ARIMA    | 2,816,615 | 2,274,886 | 12.30  |
+| ARIMA*    | 2,816,615 | 2,274,886 | 12.30% |
 | ETS      | 3,992,650 | 3,609,188 | 18.91% |
 | Prophet | 2,119,691 | 1,723,205 | 5.52%  |
 
 ## Forecast Results 
 
+Moving forward using the ARIMA model for a six-month forecast. Figure 11 is a plot of the 6-month forecast for Harrah's.
+<p align="center">
+<img src="Images/six_month_fcast.png" alt="Six Month Forecast" width="500"><br>Figure 9 6-Month Forecast
+</p>
 
+| Date | Revenue |
+|------|---------|
+| 2024 Oct | 18,028,886 |
+| 2024 Nov | 18,830,544 |
+| 2024 Dec | 18,164,272 |
+| 2025 Jan | 19,670,769 |
+| 2025 Feb | 18,902,990 |
+| 2025 Mar | 19,621,175 |
 
 
 
