@@ -157,10 +157,10 @@ The following are the results from the model trained using 90% of the dataset an
 | Mean     | 2,947,411 | 2,349,928 | 12.78% |
 | ARIMA    | 2,816,615 | 2,274,886 | 12.30  |
 | ETS      | 3,992,650 | 3,609,188 | 18.91% |
-| Prophet* | 2,119,691 | 1,723,205 | 5.52%  |
+| Prophet | 2,119,691 | 1,723,205 | 5.52%  |
 
 ## Forecast Results 
-19.79942   0.031208
+
 
 
 
