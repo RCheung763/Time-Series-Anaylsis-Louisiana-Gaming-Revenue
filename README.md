@@ -72,6 +72,7 @@ An ACF plot however shows a more gradual decline to zero which suggests non-stat
 <img src="Images/pacf_plot.png" alt="PACF log" width="500"><br>Figure 6
 </p>
 
+
 The autocorrelation function, acf, plot shows suggest that an autoregressive, AR, model may be appropriate. The partial autocorrelation function, PACF, plot suggests that it may be of order 1 or higher.
 
 The ETS and Prophet models do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. So an ADF test is no necessary.
@@ -121,7 +122,7 @@ Horizon: 12-month
 
 ### Residual Analysis
 
-In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. The other important properties is to see if residuals center around zero which tells us whether the forecast is biased or not. Additionally, but not necessary, we can check to see if  
+In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. The other important properties is to see if residuals center around zero which tells us whether the forecast is biased or not.   
 
 The fable package in R allows for easy plotting of our residuals, Figure 8 and 9 are the residual plot of our ETS and ARIMA model. These plots make it easy to visually inspect for a mean that centers around zero. 
 
@@ -130,7 +131,7 @@ The fable package in R allows for easy plotting of our residuals, Figure 8 and 9
 </p>
 <br>
 <p align="center">
-<img src="Images/arima_resid_plot.png" alt="ETS Residuals" width="500"><br>Figure 9 ARIMA Residual Diagnosis
+<img src="Images/arima_resid_plot.png" alt="ARIMA Residuals" width="500"><br>Figure 9 ARIMA Residual Diagnosis
 </p>
 
 For the prophet model, I manually plotted the residuals to inspect for a mean around zero. Figure 10 is the residual plot from the Prophet Model. Apart from the outliers as a result of shocks from COVID and Hurricane IDA it does stay fairly centered around zero for all models. 
