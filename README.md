@@ -47,7 +47,7 @@ Seasonality is not obvious from visual inspection. I inspected for seasonality i
 Seasonal trend decomposition with Loess, or STL, was then used on the imputed data to look for any underlying patterns. STL was chosen over other methods of decomposition such as X-11 for its flexibility. It is robust with missing values and outliers, and does not follow strict assumptions about periodicity. From Figure 4 we can evaluate whether the error, trend, and seasonality components are additive, multiplicative, or if no trend or seasonality is present. It is likely that the error is additive, despite some volatility it is fairly constant over time, it does not increase or decrease with the level. As opposed to multiplicative where the error scales to the level of the data. The trend is also likely additive but could also be additive and damped. There is a downward slope especially fowllowing a significant dip in revenue, however we could consider it damped as it does tend to flatten out over time. From visual inspection the seasonality could be additive or multiplicative, it is fairly constant, however there is increased variation as the levels decrease. 
 
 <p align="center">
-  <img src="Images/plot_stl.png" alt="Figure 2" width="600"><br>Figure 4
+  <img src="Images/plot_stl.png" alt="Figure 2" width="600"><br>Figure 3
 </p>  
 
 ## Methodology
@@ -65,11 +65,11 @@ Our test statistic tells us how far the data is from a unit root. A unit root is
 An ACF plot however shows a more gradual decline to zero which suggests non-stationarity. When the data is differenced an ADF test still the ACF no longer suggests non-stationarity, however the PACF still has several significant spikes. 
 
 <p align="center">
-<img src="Images/acf_plot.png" alt="ACF log" width="500"><br>Figure 5
+<img src="Images/acf_plot.png" alt="ACF log" width="500"><br>Figure 3
 </p>
 
 <p align="center">
-<img src="Images/pacf_plot.png" alt="PACF log" width="500"><br>Figure 6
+<img src="Images/pacf_plot.png" alt="PACF log" width="500"><br>Figure 4
 </p>
 
 
@@ -77,10 +77,10 @@ The autocorrelation function, acf, plot shows suggest that an autoregressive, AR
 
 The ETS and Prophet models do not require stationarity, as it models trends, seasonality and other non-stationary underlying structures directly. So an ADF test is no necessary.
 
-The first training set is composed of 90% of our data and the test set is the remaining 10%.  Cross validation was done by creating multiple training sets from the training set. The first training set will to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 7 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
+The first training set is composed of 90% of our data and the test set is the remaining 10%.  Cross validation was done by creating multiple training sets from the training set. The first training set will to forecast each subsequent data point, the next training set will add the next datapoint in the series creating a data set of 171 observations, the next 172, and so on. Forecast accuracy is computed by averaging over the test Figure 4 illustrates this where blue are the training sets and the orange are the test sets. One illustrates forecast 1 step ahead and the other 4 steps ahead. 
 
 <p align="center">
-<img src="Images/cv1-1.png" width="400"><img src="Images/cv4-1.png" width="400"><br>Figure 7
+<img src="Images/cv1-1.png" width="400"><img src="Images/cv4-1.png" width="400"><br>Figure 4
 </p>
 
 This cross validation technique is used for the ARIMA, ETS, and the prophet model.
@@ -124,19 +124,19 @@ Horizon: 12-month
 
 In addition to the cross-validation results, I looked at innovation residuals to evaluate these forecasting methods. What we look for are residuals that are uncorrelated which tells us that the models have captured all the information from the data. The other important properties is to see if residuals center around zero which tells us whether the forecast is biased or not.   
 
-The fable package in R allows for easy plotting of our residuals, Figure 8 and 9 are the residual plot of our ETS and ARIMA model. These plots make it easy to visually inspect for a mean that centers around zero. 
+The fable package in R allows for easy plotting of our residuals, Figure 5 and 6 are the residual plot of our ETS and ARIMA model. These plots make it easy to visually inspect for a mean that centers around zero. 
 
 <p align="center">
-<img src="Images/ets_resid_plot.png" alt="ETS Residuals" width="500"><br>Figure 8 ETS Residual Diagnosis
+<img src="Images/ets_resid_plot.png" alt="ETS Residuals" width="500"><br>Figure 5 ETS Residual Diagnosis
 </p>
 <br>
 <p align="center">
-<img src="Images/arima_resid_plot.png" alt="ARIMA Residuals" width="500"><br>Figure 9 ARIMA Residual Diagnosis
+<img src="Images/arima_resid_plot.png" alt="ARIMA Residuals" width="500"><br>Figure 6 ARIMA Residual Diagnosis
 </p>
 
-For the prophet model, I manually plotted the residuals to inspect for a mean around zero. Figure 10 is the residual plot from the Prophet Model. Apart from the outliers as a result of shocks from COVID and Hurricane IDA it does stay fairly centered around zero for all models. 
+For the prophet model, I manually plotted the residuals to inspect for a mean around zero. Figure 7 is the residual plot from the Prophet Model. Apart from the outliers as a result of shocks from COVID and Hurricane IDA it does stay fairly centered around zero for all models. 
 <p align="center">
-<img src="Images/prophet_resid_plot.png" alt="ETS Residuals" width="500"><br>Figure 10 Prophet Residual Diagnosis
+<img src="Images/prophet_resid_plot.png" alt="ETS Residuals" width="500"><br>Figure 7 Prophet Residual Diagnosis
 </p>
 
 To check for autocorrelation in the residuals we use the Ljung-Box test. The null hypothesis is that there is no autocorrelation and the residuals are independently distributed. The alternative hypothesis is that at least one autocorrelation is statistically significant different from zero. 
